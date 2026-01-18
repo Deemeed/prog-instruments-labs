@@ -1,6 +1,9 @@
 from auth import register, login
 from database import init_database
 from student_operations import add_student, view_students, search_student, update_student, delete_student
+from logger import setup_logging
+
+logger = setup_logging()
 
 
 def display_menu():
@@ -13,6 +16,7 @@ def display_menu():
 
 
 def exit_program():
+    logger.info("Пользователь завершил работу программы")
     print("---------------------------------")
     print(" Thank you for using our system!")
     print("    Created by Siddharth Jain")
@@ -21,31 +25,55 @@ def exit_program():
 
 
 def start(conn, cursor):
+    logger.info("Начало работы с системой")
     print("-------------------------------------")
     print(" Welcome to Student Management System")
     print("-------------------------------------")
     print("1: Login")
     print("2: Register")
+
     choice = input("Enter your choice: ")
+
     if choice == "1":
+        logger.info("Пользователь выбрал вход в систему")
         if login(cursor):
-            return
+            logger.info("Успешный вход в систему")
+            return True
         else:
-            start(conn, cursor)
+            logger.warning("Неудачная попытка входа")
+            return start(conn, cursor)
     elif choice == "2":
+        logger.info("Пользователь выбрал регистрацию")
         if register(cursor, conn):
-            return
+            logger.info("Успешная регистрация и вход")
+            return True
         else:
-            start(conn, cursor)
+            return start(conn, cursor)
+    else:
+        logger.warning(f"Некорректный выбор в меню старта: {choice}")
+        print("Invalid choice!")
+        return start(conn, cursor)
 
 
 def main():
-    conn, cursor = init_database()
-    start(conn, cursor)
+    logger.info("Программа инициализирована")
+
+    try:
+        conn, cursor = init_database()
+        logger.info("База данных успешно инициализирована")
+    except Exception as e:
+        logger.error(f"Ошибка инициализации базы данных: {e}")
+        print(f"Database error: {e}")
+        return
+
+    if not start(conn, cursor):
+        return
 
     while True:
         display_menu()
         choice = input("Enter your choice: ")
+
+        logger.info(f"Пользователь выбрал опцию: {choice}")
 
         if choice == "1":
             add_student(cursor, conn)
@@ -61,6 +89,7 @@ def main():
             exit_program()
             break
         else:
+            logger.warning(f"Неверный выбор в главном меню: {choice}")
             print("Invalid choice!")
 
 
