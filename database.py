@@ -5,12 +5,12 @@ logger = logging.getLogger('StudentSystem.database')
 
 
 def init_database():
-    logger.info("Инициализация базы данных SQLite")
+    logger.info("SQLite database initialized")
 
     try:
         conn = sqlite3.connect('students.db')
         cursor = conn.cursor()
-        logger.info("Подключение к базе данных успешно установлено")
+        logger.info("Connection to the database has been established successfully")
 
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS studentsinfo(
@@ -21,7 +21,7 @@ def init_database():
                 phone TEXT
             )
         ''')
-        logger.info("Таблица studentsinfo проверена/создана")
+        logger.info("Table studentsinfo created")
 
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS admin(
@@ -29,13 +29,13 @@ def init_database():
                 password TEXT
             )
         ''')
-        logger.info("Таблица admin проверена/создана")
+        logger.info("Table admin created")
 
         conn.commit()
-        logger.info("База данных готова к использованию")
+        logger.info("The database is ready for use")
 
         return conn, cursor
 
     except Exception as e:
-        logger.error(f"Ошибка инициализации базы данных: {e}")
+        logger.error(f"Database initialization error: {e}", exc_info=True)
         raise

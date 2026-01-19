@@ -10,7 +10,7 @@ def hash_password(password):
 
 
 def register(cursor, conn):
-    logger.info("Начало процесса регистрации нового пользователя")
+    logger.info("Starting the new user registration process")
 
     print("-------------------------")
     print("--------Register---------")
@@ -22,23 +22,23 @@ def register(cursor, conn):
     try:
         cursor.execute("INSERT INTO admin VALUES (?, ?)", (id, hashed_password))
         conn.commit()
-        logger.info(f"Успешная регистрация пользователя с ID: {id}")
+        logger.info(f"Successful registration of user with ID: {id}")
         print("Registered successfully!")
     except sqlite3.IntegrityError:
-        logger.warning(f"Попытка регистрации существующего пользователя: {id}")
+        logger.warning(f"Attempt to register an existing user: {id}", exc_info=True)
         print("User already exists!")
     except Exception as e:
-        logger.error(f"Ошибка при регистрации пользователя {id}: {e}")
+        logger.error(f"Error while registering user {id}: {e}", exc_info=True)
         print(f"Registration error: {e}")
 
     input("Press Enter to continue!")
 
-    logger.info("Автоматический вход после регистрации")
+    logger.info("Automatic login after registration")
     return login(cursor)
 
 
 def login(cursor):
-    logger.info("Начало процесса авторизации")
+    logger.info("Beginning of the authorization process")
 
     print("-------------")
     print("--- login ---")
@@ -53,12 +53,12 @@ def login(cursor):
     result = cursor.fetchall()
 
     if len(result) == 1:
-        logger.info(f"Успешный вход пользователя: {id}")
+        logger.info(f"Successful user login: {id}")
         print("-------------------------------------")
         print(f"--Welcome {id}, what you want to do!--")
         print("-------------------------------------")
         return True
     else:
-        logger.warning(f"Неудачная попытка входа для пользователя: {id}")
+        logger.warning(f"Failed login attempt for user: {id}")
         print("Invalid credentials!")
         return False

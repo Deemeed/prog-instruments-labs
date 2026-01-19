@@ -1,0 +1,27 @@
+2026-01-19 23:47:49,338 - StudentSystem - INFO - ==================================================
+2026-01-19 23:47:49,338 - StudentSystem - INFO - System started
+2026-01-19 23:47:49,338 - StudentSystem - INFO - ==================================================
+2026-01-19 23:47:49,338 - StudentSystem - INFO - Program initialized
+2026-01-19 23:47:49,338 - StudentSystem.database - INFO - SQLite database initialized
+2026-01-19 23:47:49,338 - StudentSystem.database - INFO - Connection to the database has been established successfully
+2026-01-19 23:47:49,338 - StudentSystem.database - INFO - Table studentsinfo created
+2026-01-19 23:47:49,340 - StudentSystem.database - INFO - Table admin created
+2026-01-19 23:47:49,340 - StudentSystem.database - INFO - The database is ready for use
+2026-01-19 23:47:49,340 - StudentSystem - INFO - Database initialized successfully
+2026-01-19 23:47:49,340 - StudentSystem - INFO - System started
+2026-01-19 23:48:00,500 - StudentSystem - INFO - User chose to login
+2026-01-19 23:48:00,500 - StudentSystem.auth - INFO - Beginning of the authorization process
+2026-01-19 23:48:06,250 - StudentSystem.auth - INFO - Successful user login: ZX
+2026-01-19 23:48:06,250 - StudentSystem - INFO - Login successfully
+2026-01-19 23:48:15,404 - StudentSystem - INFO - User choice: 2
+2026-01-19 23:48:15,404 - StudentSystem.operations - INFO - View a list of all students
+2026-01-19 23:48:15,405 - StudentSystem.operations - INFO - 2 students found
+2026-01-19 23:48:22,734 - StudentSystem - INFO - User choice: 5
+2026-01-19 23:48:22,734 - StudentSystem.operations - INFO - Removing a student
+2026-01-19 23:48:26,410 - StudentSystem.operations - INFO - Deleting a student from sch_no: 3
+2026-01-19 23:48:26,416 - StudentSystem.operations - INFO - Student with sch_no 3 successfully removed
+2026-01-19 23:48:31,186 - StudentSystem - INFO - User choice: 2
+2026-01-19 23:48:31,186 - StudentSystem.operations - INFO - View a list of all students
+2026-01-19 23:48:31,186 - StudentSystem.operations - INFO - 1 students found
+2026-01-19 23:48:34,583 - StudentSystem - INFO - User choice: 6
+2026-01-19 23:48:34,585 - StudentSystem - INFO - The user has completed the program
